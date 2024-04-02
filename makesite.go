@@ -11,10 +11,7 @@ import (
 // Page holds all the information we need to generate a new
 // HTML page from a text file on the filesystem.
 type Page struct {
-	TextFilePath string
-	TextFileName string
-	HTMLPagePath string
-	Content      string
+	Content string
 }
 
 func main() {
@@ -27,12 +24,31 @@ func main() {
 	}
 	fmt.Print(string(fileContents))
 
+	page := Page{
+		Content: string(fileContents),
+	}
+
 	// Create a new template in memory named "template.tmpl".
 	// When the template is executed, it will parse template.tmpl,
 	// looking for {{ }} where we can inject content.
-	// .Must means that any error will result in a panic
+	// .Must means that any error will result in a panic.
 	tmpl := template.Must(template.New("template.tmpl").ParseFiles("template.tmpl"))
 
-	tmpl.Execute(os.Stdout, string(fileContents))
+	// Render the contents of `first-post.txt` using Go Templates and print it to stdout.
+	err = tmpl.Execute(os.Stdout, string(fileContents))
+	if err != nil {
+		panic(err)
+	}
+	// Create a new, blank HTML file.
+	newFile, err := os.Create("first-post.html")
+	if err != nil {
+		panic(err)
+	}
+
+	// Executing the template injects the Page instance's data,
+	// allowing us to render the content of our text file.
+	// Furthermore, upon execution, the rendered template will be
+	// saved inside the new file we created earlier.
+	tmpl.Execute(newFile, page)
 
 }
