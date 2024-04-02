@@ -1,0 +1,12 @@
+It's not DNS.
+There is no way It's DNS.
+It was DNS.
+- SSBroski
+
+By limmerickDB:
+
+A programmer started to cuss,
+'cause getting to sleep was a fuss.
+As he lie there in bed,
+looping round in his head,
+was while(!asleep)sheep++;

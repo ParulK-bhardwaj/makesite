@@ -1,0 +1,22 @@
+Roses are Red.
+Violets are Blue
+Unexpected '{'
+on line 32.
+
+//Roses are red
+//Violets are blue
+abstract class Poem {
+//TODO
+
+
+$ If you're happy and you know it, syntax error Syntax error $ if you're happy and you know it, syntax error Syntax error $ in you're happy and you know it and your face surely shows it, if you're happy and you know it, syntax error Syntax error!!
+
+Roses are red, violets are blue
+For the 85th time, stop calling hard drives "CPUs."
+
+Roses are red, violets are blue
+Computer errors are common, root cause is typically you
+Roses are red, dirt is brown
+Users lose their minds when the Wi-Fi goes down
+Roses are red, lettuce is green
+Be nice to computers, before rise of machines

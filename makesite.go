@@ -21,6 +21,7 @@ func main() {
 	// It takes three arguments:
 	// the flag name, the default value, and the usage description.
 	flagPtr := flag.String("file", "first-post.txt", "The name of the file to read")
+	// dirPtr := flag.String("dir", ".", "The directory to find all .txt files")
 	flag.Parse()
 
 	fileContents, err := os.ReadFile(*flagPtr)
