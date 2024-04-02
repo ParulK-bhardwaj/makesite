@@ -42,7 +42,8 @@ func main() {
 	tmpl := template.Must(template.New("template.tmpl").ParseFiles("template.tmpl"))
 
 	// Render the contents of `first-post.txt` using Go Templates and print it to stdout.
-	err = tmpl.Execute(os.Stdout, string(fileContents))
+	err = tmpl.Execute(os.Stdout, page)
+
 	if err != nil {
 		panic(err)
 	}
@@ -57,5 +58,4 @@ func main() {
 	// Furthermore, upon execution, the rendered template will be
 	// saved inside the new file we created earlier.
 	tmpl.Execute(newFile, page)
-
 }
