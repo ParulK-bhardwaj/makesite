@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"html/template"
 
@@ -15,7 +16,13 @@ type Page struct {
 }
 
 func main() {
-	fileContents, err := os.ReadFile("first-post.txt")
+	// flag.String: This creates a new flag of type string.
+	// It takes three arguments:
+	// the flag name, the default value, and the usage description.
+	flagPtr := flag.String("file", "first-post.txt", "The name of the file to read")
+	flag.Parse()
+
+	fileContents, err := os.ReadFile(*flagPtr)
 	if err != nil {
 		// A common use of `panic` is to abort if a function returns an error
 		// value that we don’t know how to (or want to) handle. This example
