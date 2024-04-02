@@ -1,0 +1,22 @@
+limmericks by iPhoenix
+
+A man named Dave 
+There once was a man named Dave, 
+who thought he would try to be brave. 
+He touched my code 
+and made it explode 
+so now he is in a mass grave. 
+
+I'm too lazy to check the inputs to my slope calculation. 
+Please don't let x be zero, 
+I'll force you to eat a guiro. 
+It'll crash the game, 
+You'll hate git blame 
+And you'll be compared to Emperor Nero. 
+
+Darn C++ 
+Will this machine ever halt? 
+Filled with code, nothing occult 
+I made it compile 
+(it took a short while) 
+But all that I got was a segfault
