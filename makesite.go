@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"strings"
 
 	// "io/ioutil" >> Deprecated, replaced with "os"
 	"os"
@@ -47,8 +48,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// output filename
+	baseName := strings.TrimSuffix(*flagPtr, ".txt")
+	newHtmlFileName := baseName + ".html"
 	// Create a new, blank HTML file.
-	newFile, err := os.Create("first-post.html")
+	newFile, err := os.Create(newHtmlFileName)
 	if err != nil {
 		panic(err)
 	}
