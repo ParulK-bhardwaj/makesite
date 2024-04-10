@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 // Page holds all the information we need to generate a new
@@ -17,6 +18,8 @@ type Page struct {
 }
 
 func main() {
+
+	startTime := time.Now()
 	// flag.String: This creates a new flag of type string.
 	// It takes three arguments:
 	// the flag name, the default value, and the usage description.
@@ -88,6 +91,9 @@ func main() {
 	// Always return one significant digit after the decimal point.
 	totalFileSizeKB := float64(totalHTMLFileSize) / 1024
 
+	// Calculate time that it took the program to run
+	duration := time.Since(startTime)
+
 	// success message : Success! in bold green and count is bold
-	fmt.Printf("\033[1;32mSuccess!\033[0m Generated \033[1m%d\033[0m pages (%.1fkB total).\n", fileCount, totalFileSizeKB)
+	fmt.Printf("\033[1;32mSuccess!\033[0m Generated \033[1m%d\033[0m pages (%.1fkB total) in %.2f seconds.\n", fileCount, totalFileSizeKB, duration.Seconds())
 }
