@@ -4,8 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
-
-	// "io/ioutil" >> Deprecated, replaced with "os"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -24,7 +23,13 @@ func main() {
 	dirPtr := flag.String("dir", ".", "The directory to find all .txt files")
 	flag.Parse()
 
-	files, err := os.ReadDir(*dirPtr)
+	// Initialize a counter for the number of HTML Files
+	fileCount := 0
+
+	// Initialize a counter for the total size of HTML Files
+	var totalHTMLFileSize int64 = 0
+
+	files, err := ioutil.ReadDir(*dirPtr)
 	if err != nil {
 		// A common use of `panic` is to abort if a function returns an error
 		// value that we don’t know how to (or want to) handle. This example
@@ -41,12 +46,11 @@ func main() {
 		}
 
 		fmt.Println(file.Name())
-		fileContents, err := os.ReadFile(filepath.Join(*dirPtr, file.Name()))
+		fileContents, err := ioutil.ReadFile(filepath.Join(*dirPtr, file.Name()))
 		if err != nil {
 			panic(err)
 		}
 
-		// struct
 		page := Page{
 			Content: string(fileContents),
 		}
@@ -75,5 +79,15 @@ func main() {
 		}
 
 		fmt.Printf("Generated HTML file: %s\n", newHtmlFileName)
+
+		totalHTMLFileSize += file.Size()
+		fileCount++
 	}
+
+	// total file size in kilobytes
+	// Always return one significant digit after the decimal point.
+	totalFileSizeKB := float64(totalHTMLFileSize) / 1024
+
+	// success message : Success! in bold green and count is bold
+	fmt.Printf("\033[1;32mSuccess!\033[0m Generated \033[1m%d\033[0m pages (%.1fkB total).\n", fileCount, totalFileSizeKB)
 }
