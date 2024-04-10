@@ -9,6 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/ttacon/chalk"
 )
 
 // Page holds all the information we need to generate a new
@@ -47,8 +49,11 @@ func main() {
 		if filepath.Ext(file.Name()) != ".txt" {
 			continue
 		}
+		fmt.Println(chalk.Blue.Color("-------------------------------------------------------"))
 
-		fmt.Println(file.Name())
+		blueOnWhite := chalk.Blue.NewStyle().WithBackground(chalk.White)
+		fmt.Println(blueOnWhite.WithTextStyle(chalk.Bold).Style("Text File to be converted:"), file.Name())
+
 		fileContents, err := ioutil.ReadFile(filepath.Join(*dirPtr, file.Name()))
 		if err != nil {
 			panic(err)
@@ -81,7 +86,8 @@ func main() {
 			panic(err)
 		}
 
-		fmt.Printf("Generated HTML file: %s\n", newHtmlFileName)
+		fmt.Println(chalk.Magenta.Color("\nGenerated HTML file: " + newHtmlFileName))
+		fmt.Println(chalk.Blue.Color("-------------------------------------------------------\n"))
 
 		totalHTMLFileSize += file.Size()
 		fileCount++
@@ -94,6 +100,12 @@ func main() {
 	// Calculate time that it took the program to run
 	duration := time.Since(startTime)
 
-	// success message : Success! in bold green and count is bold
-	fmt.Printf("\033[1;32mSuccess!\033[0m Generated \033[1m%d\033[0m pages (%.1fkB total) in %.2f seconds.\n", fileCount, totalFileSizeKB, duration.Seconds())
+	successMsg := chalk.Green.Color("Success! Generated ")
+	pageCount := chalk.Bold.TextStyle(fmt.Sprint(fileCount))
+	fileSizeInfo := fmt.Sprintf(" pages (%.1fkB total) in ", totalFileSizeKB)
+	durationInfo := fmt.Sprintf("%.2f seconds.\n", duration.Seconds())
+
+	finalMsg := successMsg + pageCount + chalk.Yellow.Color(fileSizeInfo) + chalk.Cyan.Color(durationInfo)
+
+	fmt.Print(finalMsg, chalk.Reset)
 }
